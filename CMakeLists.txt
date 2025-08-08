@@ -9,6 +9,4 @@ include_directories(BankingCode/src/Bank)
 add_executable(Banking_System
         BankingCode/src/Bank/Bank.cpp
         BankingCode/src/Bank/Bank.h
-        BankingCode/src/test.cpp
-        BankingCode/src/test.h
         BankingCode/main.cpp)
