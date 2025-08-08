@@ -1,4 +1,4 @@
-#include "src/Bank/Bank.h"
+#include "Bank.h"
 
 int main(int argc, char* argv[])
 {
