@@ -3,12 +3,12 @@ project(Banking_System)
 
 set(CMAKE_CXX_STANDARD 14)
 
-include_directories(Banking/src)
-include_directories(Banking/src/Bank)
+include_directories(BankingCode/src)
+include_directories(BankingCode/src/Bank)
 
 add_executable(Banking_System
-        Banking/src/Bank/Bank.cpp
-        Banking/src/Bank/Bank.h
-        Banking/src/test.cpp
-        Banking/src/test.h
-        Banking/main.cpp)
+        BankingCode/src/Bank/Bank.cpp
+        BankingCode/src/Bank/Bank.h
+        BankingCode/src/test.cpp
+        BankingCode/src/test.h
+        BankingCode/main.cpp)
