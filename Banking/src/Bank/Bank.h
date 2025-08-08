@@ -4,13 +4,28 @@
 
 class Bank
 {
-public:
-int number;
-    
-    Bank()
-        : number(1)
-    {
-        std::cout << "Bank constructor" << std::endl;
-        std::cout << "Number: " << number << std::endl;
-    }
+    public:
+        Bank()
+            : accountNumber(0),
+              balance(10.0)
+        {
+            accountNumber = randomNumberGenerator();
+        }
+
+        //random number balance
+        void deposit();
+
+        static int randomNumberGenerator();
+
+        virtual void withdraw();
+        virtual void display();
+
+    ~Bank()
+    = default;
+
+    private:
+        int accountNumber;
+        double balance;
+
+
 };
