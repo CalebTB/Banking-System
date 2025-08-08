@@ -1,4 +1,9 @@
 # Default ignored files
+/Banking/Banking.sln
+/Banking/x64/
+/Banking/main/
+/Banking/.idea/
+
 /shelf/
 /workspace.xml
 # Rider ignored files
