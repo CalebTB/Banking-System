@@ -1,31 +1,41 @@
 #pragma once
-#include <iostream>
-#include <ostream>
 
-class Bank
-{
-    public:
-        Bank()
-            : accountNumber(0),
-              balance(10.0)
-        {
-            accountNumber = randomNumberGenerator();
-        }
+#include "Bank.h"
 
-        //random number balance
-        void deposit();
+class SavingsAccount;
+class CheckingAccount;
+/*
+ * Banks sole purpose is to display all the given information of the saving accounts and checking accounts
+ * while also starting the accounts and setting them up.
+ */
+class Bank {
+public:
+    Bank()
+    : accountNumber(0),
+      savingsAccountNumber(0),
+      checkingAccountNumber(0)
+    {
+        accountNumber = randomAccountNumberGenerator();
+        savingsAccountNumber = accountNumber + 1;
+        checkingAccountNumber = accountNumber + 2;
+    }
+    static int randomAccountNumberGenerator();
+    static int randomDepositNumberGenerator();
 
-        static int randomNumberGenerator();
+    int getAccountNumber()         const { return accountNumber; }
+    int getSavingsAccountNumber()  const { return savingsAccountNumber; }
+    int getCheckingAccountNumber() const { return checkingAccountNumber; }
+    double getBalance()            const { return startingBalance; }
 
-        virtual void withdraw();
-        virtual void display();
+    virtual void deposit()  {/*no implementation*/};
+    virtual void withdraw() {/*no implementation*/};
+    void display(const SavingsAccount& pUserSavings, const CheckingAccount& pUserChecking) const;
 
-    ~Bank()
-    = default;
+    virtual ~Bank(); //not implemented
 
-    private:
-        int accountNumber;
-        double balance;
-
-
+private:
+    int accountNumber;
+    int savingsAccountNumber;
+    int checkingAccountNumber;
+    const double startingBalance = 100.0;
 };
