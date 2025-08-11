@@ -4,43 +4,36 @@
 #include <iostream>
 
 #include "CheckingAccount.h"
-#include "SavingAccount.h"
+#include "Bank.h"
+#include "Utilities.h"
+
+CheckingAccount::CheckingAccount() { balance = Utilities::randomDepositNumberGenerator(); }
+
+void CheckingAccount::display() { std::cout << "CHECKING:\t\t|$" << balance << std::endl; }
 
 void CheckingAccount::deposit()
 {
-    const double tempBalance = checkingBalance;
-    checkingBalance = (randomDepositNumberGenerator()) + checkingBalance;
-    std::cout << "Added $" << checkingBalance - tempBalance << " to the checking account!" <<  "\n";
+    const double tempBalance = balance;
+    balance                  = (Utilities::randomDepositNumberGenerator()) + balance;
+    std::cout << "Added $" << balance - tempBalance << " to the checking account!" << "\n";
 }
 
-double CheckingAccount::withdraw(const SavingsAccount& pSavingsAccount)
+void CheckingAccount::withdraw()
 {
-    int userNum;
-    const double getTempSavingBalance = pSavingsAccount.getSavingsBalance();
-    double setTempSavingBalance = 0;
+    double userBalance;
 
-    std::cout << "Enter Withdrawal Amount: ";
-    std::cin >> userNum;
-    checkingBalance -= userNum;
-    if (checkingBalance < -overdraftLimit)
+    std::cout << "Enter balance to withdraw: ";
+    std::cin >> userBalance;
+
+    balance -= userBalance;
+    if (balance < -overdraftLimit)
     {
         int counter = 0;
+        for (int i = balance; i < checkingBalanceMinimumAfterOverDraft; i++) { counter++; }
 
-        for (int i = checkingBalance; i < checkingBalanceMinimumAfterOverDraft ; i++) { counter += 1; }
-        setTempSavingBalance = getTempSavingBalance - (counter + overdraftFee);
-        checkingBalance += (counter + overdraftFee);
-        std::cout << "Overdraft + Fee: $" << (counter + overdraftFee) << "\n";
+        overdraftAmountOutOfSavings = (counter + overdraftFee);
+        balance += overdraftAmountOutOfSavings;
+        std::cout << "Overdraft + Fee: $" << overdraftAmountOutOfSavings << std::endl;
     }
-    else
-    {
-        setTempSavingBalance = getTempSavingBalance;
-    }
-    std::cout << "Amount after withdrawal: " << checkingBalance << "\n";
-
-    return setTempSavingBalance;
-}
-
-void CheckingAccount::transfer()
-{
-
+    std::cout << "Amount after withdrawal: $" << balance << std::endl;
 }
