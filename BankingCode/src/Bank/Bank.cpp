@@ -1,41 +1,23 @@
-
 #include <iostream>
-#include <random>
 
 #include "Bank.h"
-#include "CheckingAccount.h"
-#include "SavingAccount.h"
-/*
- * STATIC
- */
-int Bank::randomAccountNumberGenerator() {
 
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dis(1000000, 2000000);
+#include "Utilities.h"
 
-    return dis(gen);
-}
-
-int Bank::randomDepositNumberGenerator()
+Bank::Bank()
+    : accountNumber(0), savingsAccountNumber(0), checkingAccountNumber(0)
 {
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dis(0, 5000);
-
-    return dis(gen);
+    accountNumber         = Utilities::randomDepositNumberGenerator();
+    savingsAccountNumber  = accountNumber + 1;
+    checkingAccountNumber = accountNumber + 2;
 }
 
-//--------------------------------------------------------------
 
-void Bank::display(const SavingsAccount& pUserSavings, const CheckingAccount& pUserChecking) const
+void Bank::display()
 {
-    std::cout << "Account Number: " << accountNumber << "\n-----------------------------------\n";
-    std::cout << "Savings Account Number: " << savingsAccountNumber << "\n";
-    std::cout << "Current Savings Balance: $" << pUserSavings.getSavingsBalance()
-    << "\n-----------------------------------\n";
-    std::cout << "Checking Account Number: " << checkingAccountNumber << "\n";
-    std::cout << "Current Checking Balance: $" << pUserChecking.getCheckingBalance() << "\n";
+    std::cout << "ACCOUNT #:\t\t|" << accountNumber << std::endl;
+    std::cout << "SAVINGS ACCOUNT #:\t|" << savingsAccountNumber << std::endl;
+    std::cout << "CHECKING ACCOUNT #:\t|" << checkingAccountNumber << std::endl;
+    savingsAccount.display();
+    checkingAccount.display();
 }
-
-Bank::~Bank() = default;

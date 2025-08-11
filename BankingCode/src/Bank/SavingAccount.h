@@ -4,31 +4,26 @@
 #ifndef BANKING_SYSTEM_SAVINGACCOUNT_H
 #define BANKING_SYSTEM_SAVINGACCOUNT_H
 
-#include "Bank.h"
+#include "IAccount.h"
 
-class SavingsAccount final : public Bank {
-public:
-    explicit SavingsAccount(const Bank& pBank)
-    : userBank(pBank),
-      savingsAccountNumber(pBank.getAccountNumber()),
-      savingsBalance(pBank.getBalance())
-    {}
-
-    void setSavingsBalance(const double pBalance) { savingsBalance = pBalance; }
-    double getSavingsBalance()              const { return savingsBalance; }
-
-    void deposit() override;
-    void transfer();
-
-    void addInterestAPY();
-    void display() const;
-
+class SavingsAccount final : public IAccount
+{
 private:
-    Bank userBank;
-    int savingsAccountNumber;
-    double savingsBalance;
+    double balance = 0.0;
 
     const double APY_rate = 0.042;
+
+public:
+    SavingsAccount();
+
+    void display() override;
+    void deposit() override;
+    void withdraw() override;
+    double getBalance() override { return balance; }
+
+    void addInterestAPY();
+
+    ~SavingsAccount() override = default;
 };
 
 #endif //BANKING_SYSTEM_SAVINGACCOUNT_H
