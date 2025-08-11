@@ -14,8 +14,8 @@ void SavingsAccount::deposit()
 {
     const double tempBalance = balance;
     balance = (Utilities::randomDepositNumberGenerator()) + balance;
-    std::cout << "Added $" << balance - tempBalance << " to the savings account!" << "\n";
-    std::cout << "New balance: " << balance << std::endl;
+    // std::cout << "Added $" << balance - tempBalance << " to the savings account!" << "\n";
+    // std::cout << "New balance: " << balance << std::endl;
 }
 
 void SavingsAccount::withdraw()

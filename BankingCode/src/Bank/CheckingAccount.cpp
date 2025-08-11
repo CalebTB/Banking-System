@@ -15,7 +15,7 @@ void CheckingAccount::deposit()
 {
     const double tempBalance = balance;
     balance                  = (Utilities::randomDepositNumberGenerator()) + balance;
-    std::cout << "Added $" << balance - tempBalance << " to the checking account!" << "\n";
+    // std::cout << "Added $" << balance - tempBalance << " to the checking account!" << "\n";
 }
 
 void CheckingAccount::withdraw()

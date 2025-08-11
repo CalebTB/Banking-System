@@ -18,14 +18,17 @@ int main(int argc, char *argv[])
         banks.push_back(Bank());
     }
 
-    std::fstream vectorFile("bankDataBefore.txt" , std::ios::trunc | std::ios::in | std::ios::out);
-    if (vectorFile.is_open())
+    const std::string afterFileName = "E:/Coding Projects/Banking-System/BankingCode/src/BankDataAfter.txt";
+    const std::string beforeFileName = "E:/Coding Projects/Banking-System/BankingCode/src/BankDataBefore.txt";
+
+    std::fstream beforeFile(beforeFileName , std::ios::trunc | std::ios::in | std::ios::out);
+    if (beforeFile.is_open())
     {
-        for (int i = 0; i< banks.size(); i++)
+        for (auto & bank : banks)
         {
-            vectorFile << "ACC #:\t\t" << banks[i].getAccountNumber() << std::endl
-                       << "SAVING #:\t$" <<banks[i].getSavingsAccount().getBalance() << std::endl
-                       << "CHECKING #:\t$" <<banks[i].getCheckingAccount().getBalance() << std::endl
+            beforeFile << "ACC #:\t\t" << bank.getAccountNumber() << std::endl
+                       << "SAVING #:\t$" <<bank.getSavingsAccount().getBalance() << std::endl
+                       << "CHECKING #:\t$" <<bank.getCheckingAccount().getBalance() << std::endl
             << std::endl;
         }
     }
@@ -34,7 +37,30 @@ int main(int argc, char *argv[])
         cout << "Failed to open the bankDataBefore.txt file" << std::endl;
         return 1;
     }
-    vectorFile.close();
+    beforeFile.close();
+
+    std::fstream afterFile(afterFileName , std::ios::trunc | std::ios::in | std::ios::out);
+    for (auto & bank : banks)
+    {
+        bank.getSavingsAccount().deposit();
+        bank.getCheckingAccount().deposit();
+    }
+    if (afterFile.is_open())
+    {
+        for (auto & bank : banks)
+        {
+            afterFile << "ACC #:\t\t" << bank.getAccountNumber() << std::endl
+                      << "SAVING #:\t$" <<bank.getSavingsAccount().getBalance() << std::endl
+                      << "CHECKING #:\t$" <<bank.getCheckingAccount().getBalance() << std::endl
+            << std::endl;
+        }
+    }
+    else
+    {
+        cout << "Failed to open the bankDataBefore.txt file" << std::endl;
+        return 1;
+    }
+    afterFile.close();
 
     return 0;
 }
