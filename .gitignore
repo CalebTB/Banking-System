@@ -1,32 +1,53 @@
-# Prerequisites
-*.d
-
-# Compiled Object files
-*.slo
-*.lo
+# =========================
+# Build & Compilation Files
+# =========================
+build/
+cmake-build-*/
 *.o
 *.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
 *.so
-*.dylib
 *.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
+*.dylib
 *.exe
 *.out
-*.app
+*.a
+*.lib
+*.pdb
+
+# =========================
+# IDE & Editor Files
+# =========================
+# JetBrains CLion
+.idea/
+# VSCode
+.vscode/
+# Visual Studio
+*.vcxproj
+*.vcxproj.filters
+*.sln
+
+# =========================
+# OS-specific files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Logs & Temporary files
+# =========================
+*.log
+*.tmp
+*.cache
+
+# =========================
+# Keep only code & CMake files
+# =========================
+# Allow C++ files
+!*.cpp
+!*.c
+!*.h
+!*.hpp
+
+# Allow CMake
+!CMakeLists.txt
+!*.cmake

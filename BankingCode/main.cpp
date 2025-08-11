@@ -2,58 +2,39 @@
 #include "CheckingAccount.h"
 #include "SavingAccount.h"
 
+#include <fstream>
 #include <iostream>
+#include <vector>
+
 using std::cout;
 
 int main(int argc, char *argv[])
 {
-    int menuOption = 1;
-    Bank bank;
+    std::vector<Bank> banks;
+    banks.reserve(10);
 
-    cout << "Savings before deposit: $"
-          << bank.getSavingsAccount().getBalance() << "\n";
+    for (int i = 0; i < 10; ++i)
+    {
+        banks.push_back(Bank());
+    }
 
-    bank.getSavingsAccount().deposit();
-
-    cout << "Savings after deposit: $"
-              << bank.getSavingsAccount().getBalance() << "\n";
-
-    /*cout << "1. Bank Display()" << "\n";
-    cout << "2. Savings Display()" << "\n";
-    cout << "3. Savings Deposit()" << "\n";
-    cout << "4. Checking Display" << "\n";
-    cout << "5. Checking Deposit()" << "\n";
-    cout << "6. Checking Withdrawal" << "\n";
-    cout << "0. Exit" << "\n";
-
-    while (menuOption != 0) {
-        std::cin >> menuOption;
-        switch (menuOption) {
-            case 1:
-                bank.display();
-                break;
-            case 2:
-                bank.getSavingsAccount().display();
-                break;
-            case 3:
-                bank.getSavingsAccount().deposit();
-                break;
-            case 4:
-                bank.getCheckingAccount().display();
-                break;
-            case 5:
-                bank.getCheckingAccount().deposit();
-                break;
-            case 6:
-                bank.getCheckingAccount().withdraw();
-                break;
-            case 0:
-                cout << "Good Bye!\n";
-                menuOption = 0;
-                break;
-            default: ;
+    std::fstream vectorFile("bankDataBefore.txt" , std::ios::trunc | std::ios::in | std::ios::out);
+    if (vectorFile.is_open())
+    {
+        for (int i = 0; i< banks.size(); i++)
+        {
+            vectorFile << "ACC #:\t\t" << banks[i].getAccountNumber() << std::endl
+                       << "SAVING #:\t$" <<banks[i].getSavingsAccount().getBalance() << std::endl
+                       << "CHECKING #:\t$" <<banks[i].getCheckingAccount().getBalance() << std::endl
+            << std::endl;
         }
-    }*/
+    }
+    else
+    {
+        cout << "Failed to open the bankDataBefore.txt file" << std::endl;
+        return 1;
+    }
+    vectorFile.close();
 
     return 0;
 }
